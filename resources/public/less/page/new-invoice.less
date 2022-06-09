@@ -1,0 +1,166 @@
+/// new-invoice.less -- Styling for New Invoice Page
+
+.new-invoice-main-container {
+  #mixin.paper-1();
+  display: grid;
+  grid-template-areas:
+    'title  title'
+      'left   right'
+      'button button';
+  grid-template-columns: 3fr 4fr;
+  grid-template-rows: repeat(2, auto) 40px;
+  grid-column-gap: 3em;
+
+  @media #media[tablet-query] {
+    grid-template-areas:
+      'title'
+        'left'
+        'right'
+        'button';
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, auto) auto;
+    margin-bottom: 4em;
+  }
+
+  > .title {
+    grid-area: title;
+    font-size: 2.2em;
+    font-weight: 500;
+    padding: 0.5em 1.2em;
+    padding-top: 1em;
+  }
+
+  > .left-form {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    padding: 3em 0 3em 3em;
+
+    @media #media[tablet-query] {
+      padding: 3em;
+    }
+
+    @media #media[mobile-query] {
+      padding: 1.5em;
+    }
+
+    > .input-stripe {
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid #color[offwhite3];
+      align-items: center;
+      margin: 1em 0;
+      padding: 1em 0;
+
+      &:first-child {
+        margin-top: 0;
+        padding-top: 0;
+      }
+
+      > .label {
+        font-weight: 700;
+      }
+
+      > input , > .ethlance-select-input {
+        text-align: right;
+        border: none;
+        flex-grow: 1;
+        flex-shrink: 1;
+        color: #color[dark-blue];
+        outline: none;
+      }
+
+      > .ethlance-select-input {
+        > .main {
+          border: none;
+          justify-content: flex-end;
+          overflow: visible;
+
+          > .label {
+            padding-right: 1.3em;
+          }
+
+          > .ethlance-icon {
+            padding-right: 0;
+            margin-right: -10px;
+          }
+        }
+      }
+
+      > .post-label {
+        text-align: right;
+        font-weight: 700;
+        flex-grow: 1;
+        padding-left: 0.4em;
+      }
+    }
+  }
+
+  > .right-form {
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    padding: 3em 3em 3em 0;
+
+    @media #media[tablet-query] {
+      padding: 3em;
+      padding-top: 0;
+    }
+
+    @media #media[mobile-query] {
+      padding: 1.5em;
+    }
+
+    > .label {
+      font-weight: 700;
+    }
+
+    > .ethlance-textarea-input {
+      margin: 1em 0;
+      padding: 0.5em;
+      border-radius: 5px;
+    }
+  }
+
+  > .button {
+    grid-area: button;
+    background-color: @color-purple;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-weight: 700;
+    height: 50px;
+    width: 100%;
+    border-radius: 0;
+    border-bottom-left-radius: @border-radius;
+    border-bottom-right-radius: @border-radius;
+    cursor: pointer;
+    transition: background-color 0.05s ease-in;
+
+    @media #media[tablet-query] {
+      margin: 2em;
+      margin-top: 0;
+      border-radius: 5px;
+      font-size: 2em;
+      height: 100px;
+      width: unset;
+    }
+
+    @media #media[mobile-query] {
+      margin: 1em;
+      font-size: 1.2em;
+      height: 60px;
+    }
+
+    &:hover {
+      background-color: @color-dark-blue;
+    }
+
+    > .label {
+      font-size: 1.2em;
+      padding-right: 1.5em;
+    }
+  }
+}

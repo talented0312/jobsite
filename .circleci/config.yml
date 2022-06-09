@@ -1,0 +1,94 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1.0
+  cache:
+    orbs:
+      node: circleci/node@4.1.0
+    commands:
+      with:
+        parameters:
+          cache-key:
+            default: deps.edn
+            type: string
+          cache-version:
+            default: ""
+            type: string
+          app-dir:
+            default: "."
+            type: string
+          steps:
+            type: steps
+        steps:
+          - node/install-packages:
+              app-dir: << parameters.app-dir >>
+              cache-version: << parameters.cache-version >>
+              pkg-manager: yarn
+              include-branch-in-cache-key: false
+          - restore_cache:
+              key: maven-<< parameters.cache-version >>2-{{ checksum "<< parameters.cache-key >>" }}
+          - steps: << parameters.steps >>
+          - save_cache:
+              key: maven-<< parameters.cache-version >>2-{{ checksum "<< parameters.cache-key >>" }}
+              paths:
+                - ~/.m2/repository
+
+jobs:
+
+  test:
+    working_directory: ~/ethlance
+    docker:
+      # Primary container image where all steps run.
+      - image: district0x/cljs-dev
+      # Secondary container images on common network.
+      - image: trufflesuite/ganache-cli:v6.12.2
+        command: ganache-cli -d -m district0x -p 8549 -l 8000000 --noVMErrorsOnRPCResponse --allowUnlimitedContractSize
+      - image: district0x/ipfs-daemon:latest
+      - image: postgres:latest
+        environment:
+          POSTGRES_PASSWORD: pass
+          POSTGRES_USER: user
+          POSTGRES_DB: ethlance
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore ethlance npm package cache
+          keys:
+            - npm-dependencies-ethlance-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install ethlance node modules
+          command: yarn deps
+      - save_cache:
+          name: Save ethlance npm package cache
+          key: npm-dependencies-ethlance-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Lint projects namespaces
+          command: yarn lint
+      - run:
+          name: Deploy contracts
+          command: yarn deploy
+
+      - cache/with:
+          app-dir: server
+          cache-version: server
+          cache-key: yarn.lock
+          steps:
+            - run:
+                name: Server dependencies
+                command: |
+                  yarn deps
+                working_directory: ~/ethlance/server
+            - run:
+                name: Run test suite
+                command: |
+                  npx shadow-cljs compile server-tests && node server/tests/server-tests.js
+                working_directory: ~/ethlance
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - test:
+          context: district0x

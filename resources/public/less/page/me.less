@@ -1,0 +1,109 @@
+/// my-contracts.less -- Styling for the My Contracts page
+
+#me() {
+  .sidebar-content {
+    > .section {
+      padding: 1em;
+      
+      &:not(:last-child) {
+        @attr-color: #4c3fbc;
+        border-bottom: 1px solid @attr-color;
+      }
+
+      > .label {
+        font-weight: 600;
+        color: white;
+        padding: 1em 0;
+      }
+
+      > .nav-element {
+        position: relative;
+        line-height: 0.5em;
+        padding: 0.5em 0;
+        margin: 1em 0;
+
+        > .link {
+          position: relative;
+          color: white;
+          font-weight: 300;
+          cursor: pointer;
+
+          &::after {
+            position: absolute;
+            content: '';
+            left: 0;
+            bottom: -0.5em;
+            width: 0;
+            height: 1px;
+            background-color: white;
+            transition: all 0.3s;
+            width: 0;
+          }
+          
+          &:hover {
+            &::after {
+              width: 100%;
+            }
+          }
+
+          &.active {
+            @attr-color: #00e4ff;
+
+            color: @attr-color;
+
+            &::after {
+              background-color: @attr-color;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.my-contracts-main-container {
+  #mixin.main-container-w-sidebar();
+  #mixin.box-shadow.none();
+
+  > .sidebar {
+    margin-top: #tabular-layout[tab-height];
+    #me.sidebar-content();
+  }
+
+  > .mobile-sidebar {
+    > .content {
+      width: 100%;
+      > .sidebar {
+        width: 100%;
+        #me.sidebar-content();
+      }
+    }
+  }
+
+  > .listing {
+    min-height: 100%;
+    > .tabular-layout > .active-page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      box-shadow: unset;
+      > .listing {
+        margin-top: 4em;
+        padding: 2em;
+        > .button-listing {
+          display: flex;
+          justify-content: flex-end;
+          padding: 1em 0.5em;
+          > .ethlance-circle-button {
+            margin: 0.5em;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

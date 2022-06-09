@@ -1,0 +1,166 @@
+/// main-layout.less - Ethlance main layout for the SPA
+
+
+.main-layout {
+  background-image: url("../images/corner-coins.png");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 200px 150px;
+  min-height: 100%;
+  display: grid;
+  grid-template-areas:
+  'navigation-bar'
+    'main-margin'
+    'footer';
+  grid-template-rows: 5.5em 1fr 7em;
+  grid-template-columns: 1fr;
+
+  > .main-navigation-bar {
+    grid-area: navigation-bar;
+    @media #media[desktop-query] {
+      display: none;
+      grid-area: none;
+    }
+  }
+
+  > .mobile-navigation-bar {
+    display: none;
+    grid-area: none;
+    @media #media[desktop-query] {
+      display: grid;
+      grid-area: navigation-bar;
+    }
+  }
+
+  @header-margin: 3em;
+  > .main-margin {
+    @sidebar-width: 260px;
+
+    display: grid;
+    grid-template-areas: 'main-navigation-menu main-container';
+    grid-template-columns: @sidebar-width 3fr;
+    margin: auto;
+    margin-top: 0;
+    //min-width: #media[desktop-width] + 200px;
+    width: 100%;
+    max-width: #media[max-width];
+
+    @media #media[desktop-query] {
+      grid-template-areas: 'main-container';
+      grid-template-columns: 1fr;
+      width: auto;
+      min-width: #media[tablet-width];
+    }
+
+    @media #media[tablet-query] {
+      width: 100%;
+      min-width: #media[mobile-width];
+    }
+
+    @media #media[mobile-query] {
+      min-width: unset;
+    }
+
+    > .main-navigation-menu {
+      margin-top: @header-margin;
+      grid-area: main-navigation-menu;
+
+      @media #media[desktop-query] {
+        display: none;
+        grid-area: none;
+      }
+    }
+
+    > .main-container {
+      margin-top: @header-margin;
+      margin-right: 1.2em;
+      grid-area: main-container;
+      border-radius: 10px;
+
+      @media #media[desktop-query] {
+        margin-left: 1.2em;
+      }
+
+      @media #media[tablet-query] {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      @media #media[mobile-query] {
+        #mixin.box-shadow.none();
+        margin-top: 0;
+      }
+    }
+  }
+  > .footer {
+    grid-area: footer;
+    display: grid;
+    grid-template-areas: 'copyright social';
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    margin: 0 12em 2em 2em;
+
+    @media #media[tablet-query] {
+      grid-template-areas: 'social' 'copyright';
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      margin: 0 0 0 2em;
+    }
+
+    > .copyright {
+      grid-area: copyright;
+      display: flex;
+      align-items: flex-end;
+      font-size: 0.8em;
+      font-weight: 300;
+      
+      @media #media[tablet-query] {
+        flex-direction: column;
+        margin: 0 0.5em;
+        margin-left: 3em;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      @media #media[mobile-query] {
+        margin-left: 0;
+      }
+
+      .spacer {
+        padding: 0 0.5em;
+
+        @media #media[tablet-query] {
+          display: none;
+        }
+      }
+    }
+
+    > .social {
+      grid-area: social;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: flex-end;
+
+      @media #media[tablet-query] {
+        margin-top: 1em;
+        margin-left: 2em;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      @media #media[mobile-query] {
+        margin-left: 0;
+      }
+
+      > .ethlance-circle-button {
+        margin: 0 0.5em;
+        
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+
+  }
+}

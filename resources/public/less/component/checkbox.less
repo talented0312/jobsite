@@ -1,0 +1,52 @@
+/// checkbox.less -- Checkbox input component
+
+
+.ethlance-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+
+  > .ethlance-inline-svg {
+    #outer-square {
+      stroke: #color[dark-blue] !important;
+      fill: #color[offwhite3] !important;
+    }
+
+    #cross path {
+      opacity: 0;
+    }
+  }
+
+  > .label {
+    #mixin.noselect();
+    color: #color[dark-blue];
+    padding-left: 0.5em;
+    font-weight: 400;
+  }
+
+  &:hover {
+    > .ethlance-inline-svg {
+      
+      #outer-square {
+        transition: all 0.1s ease-in;
+        fill: #color[dark-blue] !important;
+      }
+
+      #cross path {
+        transition: all 0.1s ease-in;
+        stroke: white !important;
+      }
+    }
+  }
+
+  &.checked {
+    > .ethlance-inline-svg {
+      #cross path {
+        opacity: 1;
+      }
+    }
+  }
+}

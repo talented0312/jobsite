@@ -1,0 +1,50 @@
+/// icon.less - Component containing particular SVG icons
+
+
+#ethlance-icon() {
+  primary: #color[background-light-accent-2];
+  secondary: #color[secondary];
+}
+
+
+.ethlance-icon-svg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.primary {
+    path, rect, circle, polygon {
+      fill: #ethlance-icon[primary] !important;
+      opacity: 1;
+    }
+  }
+
+  &.secondary {
+    path, rect, circle, polygon {
+      fill: #ethlance-icon[secondary] !important;
+      opacity: 1;
+    }
+  }
+
+  &.black {
+    path, rect, circle, polygon {
+      fill: #000000 !important;
+      opacity: 1;
+    }
+  }
+
+  &.white {
+    path, rect, circle, polygon {
+      fill: #ffffff !important;
+      opacity: 1;
+    }
+  }
+
+  &.dark-blue {
+    path, rect, circle, polygon {
+      fill: #color[dark-blue] !important;
+      opacity: 1;
+    }
+  }
+}
+

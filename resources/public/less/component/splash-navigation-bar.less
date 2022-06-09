@@ -1,0 +1,71 @@
+/// splash-navigation-bar.less - Navigation Bar for the splash layout
+
+
+
+.splash-navigation-link {
+  padding: 0 1em;
+
+  @media #media[tablet-query] {
+    padding: 0 0.5em;
+  }
+}
+
+
+.splash-navigation-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 2.5% 0 2.5%;
+  transition: all 0.3s;
+
+  .links {
+    display: flex;
+    flex-direction: row;
+    margin: 0 1em;
+
+    @media #media[tablet-query] {
+      margin: 0 0.7em;
+    }
+    
+    a {
+      font-size: 1em;
+      font-family: #font[sans-serif];
+      text-decoration: none;
+      color: #color[dark-blue];
+      padding: 0.4em;
+      line-height: 1em;
+
+      @media #media[tablet-query] {
+        padding: 0.2em;
+        font-size: 0.8em;
+      }
+
+      &.show-underline {
+        border-bottom: 1px solid #color[dark-blue];
+      }
+    }
+  }
+}
+
+// Use Injected Scroll Value to fade in the navigation bar
+#app:not([data-scroll='0']) > .splash-layout > .header {
+  background-color: #color[dark-blue];
+  padding: 0;
+
+  a {
+    color: white;
+    border-bottom: none;
+
+    &:hover {
+      border-bottom: 1px solid white;
+    }
+  }
+  
+  .ethlance-logo {
+    path, rect, circle, polygon, g {
+      fill: #ffffff !important;
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,147 @@
+/// search-input.less -- Styling for search input
+
+
+.ethlance-chip-search-input {
+  @container-height: 60px;
+  @container-color: #e8eefe;
+
+  display: grid;
+  position: relative;
+  min-height: @container-height;
+  grid-template-columns: [start] 1fr [middle] @container-height [end];
+  grid-template-rows: [start] 1fr [end];
+
+  &.no-search-icon {
+    grid-template-columns: [start] 1fr [end];
+  }
+
+  > .search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: @container-color;
+    flex-wrap: wrap;
+    padding-top: 0.4em;
+    padding-left: 0.2em;
+
+    > .search-input {
+      #mixin.input.text.primary();
+      font-size: 1.2em;
+      height: @container-height;
+      flex-grow: 1;
+      background-color: transparent;
+      border: none;
+      padding-left: 0.5em;
+      outline: none;
+    }
+  }
+
+  > .search-button {
+    display: flex;
+    transition: all 0.1s;
+    justify-content: center;
+    align-items: center;
+    background-color: #color[purple];
+    cursor: pointer;
+    
+    &:hover {
+      background-color: #color[dark-blue];
+    }
+  }
+
+  > .dropdown {
+    @max-container-height: 6 * @container-height;
+
+    position: absolute;
+    top: @container-height;
+    left: 0;
+    width: 100%;
+    grid-row: start / end;
+    grid-column: start / end;
+    min-height: @container-height;
+    max-height: @max-container-height;
+    overflow-x: none;
+    overflow-y: auto;
+    z-index: 10;
+
+    > .suggestion-listing {
+      display: flex;
+      cursor: pointer;
+      flex-direction: column;
+      background-color: @container-color;
+      box-shadow: 0px 3px 20px -7px rgba(0,0,0,0.2) inset;
+
+      .suggestion {
+        display: flex;
+        padding-left: 1.0em;
+        align-items: center;
+        height: @container-height;
+        border-top: 2px solid #dfdfdf;
+        
+        &:first-child {
+          border-top: 1px solid white;
+        }
+
+        &:hover , &.active {
+          color: black;
+          background-color: darken(@container-color, 5%);
+        }
+
+        &.active {
+          border-left: 5px solid rgba(128, 128, 128, 0.5);
+        }
+      }
+    }
+  }
+}
+
+.ethlance-chip {
+  #mixin.noselect();
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  padding: 0.5em 1.0em;
+  margin: 0em 0.3em 0em 0.3em;
+  border-radius: 5px;
+
+  @media #media[mobile-query] {
+      margin: 0.2em 0.3em 0.2em 0.3em;
+  }
+
+
+  > .label {
+    height: 1em;
+    padding-right: 0.5em;
+    max-width: 80px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  > .close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 3px;
+    margin: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #dfeefc;
+    transition: 0.3s all ease-out;
+
+    &:hover {
+      color: white;
+      background-color: #color[dark-blue];
+    }
+
+    > .ethlance-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

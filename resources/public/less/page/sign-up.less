@@ -1,0 +1,291 @@
+/// sign-up.less -- Main styling for sign-up page
+
+
+.sign-up-main-container {
+  @border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  > .notification-box {
+    margin-bottom: 2em;
+  }
+
+  > .notification-box.hidden {
+    display: none;
+  }
+
+  > .tabular-layout > .active-page {
+    > .candidate-sign-up {
+      display: flex;
+      flex-direction: column;
+      > .form-container {
+        margin: 4em;
+        border-top-right-radius: @border-radius;
+
+        @media #media[mobile-query] {
+          margin: 2em;
+        }
+
+        > .label {
+          color: @color-dark-blue;
+          font-size: 2.0em;
+        }
+
+        > .first-forms {
+          display: grid;
+          grid-template-areas:
+            'form-image form-name    form-professional-title form-professional-title'
+              'form-image form-email   form-hourly-rate        form-hourly-rate'
+              'form-image form-country form-connect-github     form-connect-linkedin';
+          grid-template-rows: 1fr 1fr 1fr;
+          grid-template-columns: 2fr 4fr 3fr 3fr;
+          grid-gap: 2em;
+
+          @media #media[tablet-query] {
+            grid-template-areas:
+              'form-image form-image'
+                'form-name form-name'
+                'form-email form-email'
+                'form-country form-country'
+                'form-professional-title form-professional-title'
+                'form-hourly-rate form-hourly-rate'
+                'form-connect-github form-connect-linkedin';
+            grid-template-rows: repeat(8, auto);
+            grid-template-columns: 1fr 1fr;
+          }
+
+          @media #media[mobile-query] {
+            grid-template-areas:
+              'form-image'
+                'form-name'
+                'form-email'
+                'form-country'
+                'form-professional-title'
+                'form-hourly-rate'
+                'form-connect-github'
+                'form-connect-linkedin';
+            grid-template-rows: repeat(9, auto);
+            grid-template-columns: 1fr;
+          }
+
+          .default-form() {
+            padding: 5px 5px 5px 0;
+            > * {
+              height: 3em;
+              width: 100%;
+            }
+          }
+
+          > .ethlance-text-input, > .ethlance-email-input, > .currency-input > input {
+            line-height: 0.5em;
+          }
+
+          //fixes for currency input
+          > .currency-input > input {
+            .default-form();
+          }
+
+          > .form-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+            grid-area: form-image;
+            .default-form();
+
+            @media #media[tablet-query] {
+              padding: 0;
+              margin: 4em 0;
+            }
+
+        > .upload-image {
+          @bg-color: #E8EEFE;
+          @logo-size: 150px;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background-color: @bg-color;
+          height: @logo-size;
+          width: @logo-size;
+          border-radius: 100%;
+          cursor: pointer;
+          transition: background-color 0.1s ease-in;
+          overflow: hidden;
+
+          > .dropzone {
+              width: 100%;
+              position: relative;
+
+              .file-input-label {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  position: absolute;
+
+                  // TODO: find a way of centering this diferently while still floating
+                  top: 37%;
+                  left: 27%;
+
+                  .ethlance-icon {
+                      margin-bottom: 5px;
+                  }
+              }
+
+              > input {
+                  display: none
+              }
+          }
+
+              @media #media[tablet-query] {
+                border-radius: 5px;
+                width: 100%;
+                height: 100%;
+                margin-top: 2em;
+                padding: 2em;
+              }
+
+              > .ethlance-icon {
+                padding: 0.5em 0;
+              }
+
+              > span {
+                padding: 0.5em 0;
+              }
+
+          &:hover {
+        background-color: darken(@bg-color, 10%);
+          }
+        }
+          }
+
+          > .form-name {
+            grid-area: form-name;
+            .default-form();
+            > input {
+              padding-left: 0;
+            }
+          }
+
+          > .form-email {
+            grid-area: form-email;
+            .default-form();
+          }
+
+          > .form-professional-title {
+            grid-area: form-professional-title;
+            .default-form();
+            > input {
+              padding-left: 0;
+            }
+          }
+
+          > .form-hourly-rate {
+            grid-area: form-hourly-rate;
+            .default-form();
+          }
+
+          > .form-country {
+            grid-area: form-country;
+            .default-form();
+            > .ethlance-select-input {
+              > .main {
+                padding-left: 0;
+                > span {
+                  padding-left: 0;
+                }
+              }
+            }
+          }
+
+          > .form-connect-github {
+            grid-area:  form-connect-github;
+            .default-form();
+
+            @media #media[tablet-query] {
+              height: 5em;
+            }
+          }
+
+          > .form-connect-linkedin {
+            grid-area: form-connect-linkedin;
+            .default-form();
+
+            @media #media[tablet-query] {
+              height: 5em;
+            }
+          }
+        }
+
+        > .second-forms {
+          > .label {
+            h2 {
+              display: inline-block;
+              font-weight: 700;
+              padding: 0.7em 0;
+              padding-right: 0.5em;
+            }
+
+            i {
+              font-style: italic;
+              font-weight: 300;
+            }
+          }
+
+          > .ethlance-chip-search-input {
+            margin: 0.5em 0;
+          }
+
+          > #form-for-hire {
+            padding: 2em 0;
+          }
+        }
+      }
+      > .form-submit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: @color-purple;
+        color: white;
+        font-weight: 700;
+        height: 50px;
+        border-bottom-left-radius: @border-radius;
+        border-bottom-right-radius: @border-radius;
+        cursor: pointer;
+        transition: background-color 0.05s ease-in;
+
+        @media #media[tablet-query] {
+          margin: 2em 10%;
+          margin-top: 0;
+          border-radius: 5px;
+          font-size: 2em;
+          height: 100px;
+        }
+
+        @media #media[mobile-query] {
+          font-size: 1.5em;
+          height: 60px;
+        }
+
+        &:hover:not(.disabled) {
+          background-color: @color-dark-blue;
+        }
+
+        &.disabled {
+          opacity: 0.5;
+        }
+
+        > span {
+          padding-right: 0.5em;
+        }
+      }
+    }
+
+    > .employer-sign-up {
+      .candidate-sign-up();
+    }
+
+    > .arbiter-sign-up {
+      .candidate-sign-up();
+    }
+  }
+}

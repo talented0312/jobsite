@@ -1,0 +1,201 @@
+/// select-input.less -- Styling for ethlance select-input component
+
+
+.ethlance-select-input {
+  @input-height: 3em;
+  // Max height of the select-input dropdown
+  @max-container-height: 6 * @input-height;
+  position: relative;
+
+  > .main {
+    #mixin.input.text();
+    #mixin.noselect();
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: @input-height;
+    cursor: pointer;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 0.5em;
+    transition: all 0.05s ease-in;
+    color: #color[dark-blue];
+
+    .label {
+      padding-left: 0.5em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .ethlance-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
+      padding: 0 0.5em;
+      margin: 0 0.5em;
+      width: 32px;
+      height: 32px;
+      flex-basis: 32px;
+      flex-shrink: 0; 
+    }
+
+    &:hover {
+      background-color: lighten(white, 3%);
+    }
+  }
+
+  > .dropdown {
+    position: absolute;
+    z-index: 999;
+    left: 0;
+    top: @input-height;
+    width: 100%;
+    overflow-x: none;
+    overflow-y: none;
+
+    > .search-bar {
+      display: grid;
+      grid-template-columns: 1fr 3em;
+      height: @input-height;
+      background-color: white;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+
+      input {
+        #mixin.input.text.primary();
+        font-style: italic;
+        width: 100%;
+        padding: 0 1em;
+        border: none;
+      }
+
+      > .ethlance-icon {
+        #mixin.noselect();
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+
+    > .selection-listing {
+      overflow-x: none;
+      overflow-y: auto;
+      max-height: @max-container-height;
+
+      > .selection {
+        #mixin.noselect();
+        display: flex;
+        z-index: 999;
+        align-items: center;
+        background-color: white;
+        border-bottom: 1px solid #d6e1fd;
+        height: @input-height;
+        padding-left: 1em;
+        cursor: pointer;
+
+        &:hover {
+	  background-color: #d6e1fd;
+        }
+      }
+    }
+  }
+
+  &.secondary {
+    @border-attr: 1px solid lighten(#color[dark-blue], 5%);
+
+    &:hover {
+      > .main {
+        background-color: #color[dark-purple];
+        > .ethlance-icon {
+          background-color: #color[purple];
+        }
+      }
+    }
+
+    > .main {
+      color: white;
+      background-color: #color[light-purple];
+      border-radius: 3px;
+      border: none;
+
+      > .ethlance-icon {
+        background-color: #color[dark-purple];
+      }
+    }
+
+    > .dropdown {
+      > .search-bar {
+        border: none;
+        border-bottom: @border-attr;
+        background-color: #color[light-purple];
+
+        > input {
+          #mixin.input.text.secondary();
+          outline: none;
+          border: none;
+          color: white;
+          background-color: desaturate(#color[light-purple], 5%);
+        }
+
+        > .ethlance-icon {
+          background-color: desaturate(#color[light-purple], 5%);
+        }
+      }
+      
+      > .selection-listing {
+        > .selection {
+          background-color: #color[light-purple];
+          color: white;
+          border-bottom: @border-attr;
+
+          &:hover {
+	    background-color: #color[dark-purple];
+          }
+        }
+      }
+    }
+  }
+
+  // Override height and text sizes for a bigger input element
+  &.large {
+    @input-height: 4em;
+    // Max height of the select-input dropdown
+    @max-container-height: 6 * @input-height;
+
+    > .main {
+      height: @input-height;
+
+      > .label {
+        padding: 0 0.6em;
+        font-size: 1.2em;
+      }
+
+      > .ethlance-icon {
+        //padding: 0 1.0em;
+      }
+    }
+
+    > .dropdown {
+      top: @input-height;
+
+      > .search-bar {
+        height: @input-height;
+      }
+
+      > .selection-listing {
+        max-height: @max-container-height;
+
+        > .selection {
+          height: @input-height;
+          padding: 0 1em;
+          font-size: 1.2em;
+        }
+      }
+    }
+  }
+}

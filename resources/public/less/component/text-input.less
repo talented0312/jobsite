@@ -1,0 +1,15 @@
+/// text-input.less -- Styling for the ethlance text input component
+
+.ethlance-text-input {
+  &.primary {
+    #mixin.input.text.primary();
+  }
+
+  &.secondary {
+    #mixin.input.text.secondary();
+  }
+
+  &.dirty.error {
+    #mixin.input.text.dirty.error();
+  }
+}

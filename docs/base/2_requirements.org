@@ -1,0 +1,36 @@
+#+TITLE: Ethlance Requirements
+#+OPTIONS: H:2 num:t toc:t \n:nil ::t |:t ^:t f:t tex:t
+
+- The app allows to sign up as 3 different types of users: Employers, Candidates, Arbiters.
+  - Employers :: post jobs, invite candidates and arbiters, pay invoices.
+  - Candidates :: apply for a job, receive payments.
+  - Arbiters :: resolve job disputes, receive payments.
+
+* Overview
+
+  [[./images/ethlance-overview.png]]
+
+  [[./images/ethlance-overview.png][View Image]]
+
+* User Roles
+
+** Employer
+   An employer has the responsibilities
+   - WILL Post Jobs, with full ownership
+   - WILL Hire and Assign Candidates to JobStory(s)
+   - MIGHT Hire and Assign Arbiters to Job(s)
+   - MIGHT Pay Invoices
+   - MIGHT Pay Dispute Resolutions
+   - MIGHT Create Disputes
+
+** Candidate (Employee)
+   A candidate has the responsibiliities
+   - WILL Apply for Jobs
+   - MIGHT Receive payments
+   - MIGHT Leave feedback
+   - MIGHT Create disputes
+
+** Arbiter
+   An arbiter has the responsibilities
+   - WILL Resolve disputes
+   - WILL Receive payment
